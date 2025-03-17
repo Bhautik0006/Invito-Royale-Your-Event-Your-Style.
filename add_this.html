@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            text-align: center;
+        }
+        .container {
+            background: white;
+            width: 50%;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 id="eventName"></h2>
+        <p><strong>Date:</strong> <span id="eventDate"></span></p>
+        <p><strong>Hosted By:</strong> <span id="hostName"></span></p>
+        <p><strong>Location:</strong> <span id="eventLocation"></span></p>
+        <p><strong>Description:</strong></p>
+        <p id="eventDescription"></p>
+        <img id="eventImage" src="" alt="Event Image">
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const params = new URLSearchParams(window.location.search);
+            document.getElementById("eventName").innerText = params.get("name") || "Event Name";
+            document.getElementById("eventDate").innerText = params.get("date") || "Not Set";
+            document.getElementById("hostName").innerText = params.get("host") || "Unknown";
+            document.getElementById("eventLocation").innerText = params.get("location") || "Not Specified";
+            document.getElementById("eventDescription").innerText = params.get("description") || "No Description Provided";
+            const imageUrl = params.get("image");
+            if (imageUrl) {
+                document.getElementById("eventImage").src = imageUrl;
+            } else {
+                document.getElementById("eventImage").style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>
